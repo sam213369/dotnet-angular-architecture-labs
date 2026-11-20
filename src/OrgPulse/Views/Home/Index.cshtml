@@ -1,0 +1,42 @@
+﻿@model IEnumerable<OrgPulse.Models.Department>
+
+@{
+    ViewData["Title"] = "Departments";
+}
+
+<h1>Departments</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add Department</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>DepartmentId</th>
+            <th>DepartmentName</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var department in Model)
+        {
+            <tr>
+                <td>@department.DepartmentId</td>
+                <td>@department.DepartmentName</td>
+                <td>
+                    <a asp-action="Edit"
+                       asp-route-id="@department.DepartmentId"
+                       class="btn btn-sm btn-outline-primary">Edit</a>
+                    <form asp-action="Delete"
+                          asp-route-id="@department.DepartmentId"
+                          method="post"
+                          class="d-inline"
+                          onsubmit="return confirm('Remove this department?');">
+                        <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
